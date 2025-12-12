@@ -4,22 +4,22 @@
 <meta charset="UTF-8">
 <title>Ceremony Map</title>
 <script>
-// Ceremony link
-var ceremonyLink = "https://maps.app.goo.gl/2oDmUhDecENVqrWu7";
+// Ceremony full URL
+var ceremonyLink = "https://www.google.com/maps/place/50+Pine+Ave,+Little+Bay+NSW+2036,+Australia/@-33.980426,151.249923,17z";
 
 // Detect platform
 var userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
 if (/android/i.test(userAgent)) {
-    // Android → intent link (Google Maps app)
+    // Android → intent with full URL
     window.top.location.href = "intent://maps.google.com/maps?q=" + encodeURIComponent(ceremonyLink) + "#Intent;package=com.google.android.apps.maps;scheme=https;end";
 } 
 else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    // iOS → Apple Maps app
+    // iOS → Apple Maps / fallback to Google Maps web
     window.top.location.href = "maps://?q=" + encodeURIComponent(ceremonyLink);
 } 
 else {
-    // Desktop fallback → web
+    // Desktop → web
     window.top.location.href = ceremonyLink;
 }
 </script>
