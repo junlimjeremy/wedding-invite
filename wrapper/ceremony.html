@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Ceremony Map</title>
-  <script>
-    // Redirect top-level window to ceremony Google Maps link
-    window.top.location.href = "intent://maps.app.goo.gl/2oDmUhDecENVqrWu7#Intent;package=com.google.android.apps.maps;scheme=https;end";
-  </script>
+<meta charset="UTF-8">
+<title>Ceremony Map</title>
+<script>
+// Ceremony link
+var ceremonyLink = "https://maps.app.goo.gl/2oDmUhDecENVqrWu7";
+
+// Detect platform
+var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+if (/android/i.test(userAgent)) {
+    // Android → intent link (Google Maps app)
+    window.top.location.href = "intent://maps.google.com/maps?q=" + encodeURIComponent(ceremonyLink) + "#Intent;package=com.google.android.apps.maps;scheme=https;end";
+} 
+else if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    // iOS → Apple Maps app
+    window.top.location.href = "maps://?q=" + encodeURIComponent(ceremonyLink);
+} 
+else {
+    // Desktop fallback → web
+    window.top.location.href = ceremonyLink;
+}
+</script>
 </head>
 <body>
-  <p>Redirecting to the ceremony location on Google Maps…</p>
+<p>Redirecting to the ceremony map…</p>
 </body>
 </html>
